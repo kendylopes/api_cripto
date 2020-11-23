@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CoinMarketCap</title>
+        <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <meta charset="utf-8">       
+    </head>
+    <body>
+        <div class="container my-5 text-center">
+            <button class="btn btn-danger w-100" onclick="dados()">Obter</button>
+            <div class="mt-5" id="conteudo">
+               
+            </div>
+
+        </div>
+        <script>
+            var contenido = document.querySelector('#conteudo')
+            function dados(){
+                fetch('https://randomuser.me/api/')
+                    .then(res => {
+                        if(!res.ok) throw new Error('Erro ao executar a requisição, status ' + res.status);
+                        return res.json();
+                    })
+                    .then(data=>{
+                        
+                        conteudo.innerHTML = `
+                            <img src="${data.results['0'].picture.large}" width="100px" class="img-fluid rounded-circle">
+                            <p>Nome: ${data.results['0'].name.last}</p> 
+                            <p>Email: ${data.results['0'].email}</p>
+
+                        `
+                        
+                        
+                    })
+                    .catch((error) => {
+                        console.error(error.message);
+                    })
+            }
+
+        </script>
+    </body>
+</html>
